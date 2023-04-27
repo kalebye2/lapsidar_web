@@ -1,0 +1,22 @@
+<%= form_with(model: crp_regiao, local: true) do |form| %>
+  <% if crp_regiao.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(crp_regiao.errors.count, "error") %> prohibited this crp_regiao from being saved:</h2>
+
+      <ul>
+      <% crp_regiao.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :uf_id %>
+    <%= form.text_field :uf_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

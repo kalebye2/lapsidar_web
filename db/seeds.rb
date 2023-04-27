@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+#
+
+civil_estados = CivilEstado.create([
+  { estado: 'solteiro' },
+  { estado: 'casado' },
+  { estado: 'viúvo' },
+  { estado: 'divorciado' }
+])
+
+membros = Membro.create([
+  { email: "teste@teste.com",
+    password: "password",
+    papel: Membro.administrador}
+])

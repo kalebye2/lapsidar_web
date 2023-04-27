@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  usuario_id: 1
+  responsavel_id: 1
+  parentesco: one
+
+two:
+  usuario_id: 1
+  responsavel_id: 1
+  parentesco: two
