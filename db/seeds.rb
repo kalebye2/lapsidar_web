@@ -19,3 +19,24 @@ membros = Membro.create([
     password: "password",
     papel: Membro.administrador}
 ])
+
+Uf.create([
+  {
+    :id : 0,
+    :nome : "nenhum",
+    :sigla : "NA"
+  }
+])
+
+Municipio.create([
+  {
+    :id : 0,
+    :nome : "nenhum",
+    :uf : 0
+  }
+])
+
+CrpRegiao.create([
+  :id : 0,
+  :uf_id : 0
+])

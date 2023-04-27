@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :membros
+  resources :profissional_funcoes
+  resources :profissionais
+  scope :admin do
+    devise_for :psicologos
+  end
   root to: "application#index"
 
   resources :responsavel_usuarios
