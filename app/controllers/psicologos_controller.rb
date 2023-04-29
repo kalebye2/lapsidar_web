@@ -1,5 +1,5 @@
 class PsicologosController < AuthorizationController
-  before_action :set_psicologo, only: %i[ show edit update destroy ]
+  before_action :set_psicologo, only: %i[ show edit update destroy pdf]
 
   # GET /psicologos or /psicologos.json
   def index
@@ -57,6 +57,35 @@ class PsicologosController < AuthorizationController
     end
   end
 
+  # pdf
+  def pdf
+    pdf = Prawn::Document.new
+    pdf.font Rails.root.join("public/assets/fonts/LinBiolinum_R.otf")
+    #titulo
+    pdf.text "FICHA DO PSICÓLOGO", size: 48, color: "c51422"
+
+    #nome
+    pdf.text "#{@psicologo.nome} #{@psicologo.sobrenome}", size: 24, color: "101010"
+    pdf.stroke_horizontal_rule
+    pdf.move_down 10
+
+    pdf.text "CRP #{@psicologo.crp_regiao.id.to_s.rjust(2, "0")}/#{@psicologo.crp_valor}"
+    s = @psicologo.feminino == 0 ? "feminino" : "masculino"
+    pdf.text "#{s}"
+    pdf.text "#{@psicologo.data_nascimento.strftime("%d/%m/%Y")}"
+    pdf.text "#{@psicologo.civil_estado.estado}"
+    pdf.text "#{@psicologo.email}"
+    pdf.text "(#{@psicologo.fone_cod_area}) #{@psicologo.fone_num}"
+    pdf.text "#{@psicologo.municipio.nome} - #{Uf.find(@psicologo.municipio.uf_id).sigla}"
+
+    send_data(pdf.render,
+              filename: "#{@psicologo.nome} #{@psicologo.sobrenome}.pdf",
+              type: "application/pdf",
+              disposition: "inline"
+              )
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_psicologo
@@ -67,4 +96,6 @@ class PsicologosController < AuthorizationController
     def psicologo_params
       params.require(:psicologo).permit(:nome, :sobrenome, :feminino, :cpf, :data_nascimento, :email, :fone_cod_pais, :fone_cod_area, :fone_num, :civil_estado_id, :crp_regiao_id, :crp_valor, :data_colacao, :municipio_id, :bio, :especializacao_01, :especializacao_02, :chave_pix_01, :chave_pix_02)
     end
+
+
 end

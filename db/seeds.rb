@@ -14,12 +14,6 @@ civil_estados = CivilEstado.create([
   { estado: 'divorciado' }
 ])
 
-membros = Membro.create([
-  { email: "teste@teste.com",
-    password: "password",
-    papel: Membro.administrador}
-])
-
 Uf.create([
   {
     :id : 0,
